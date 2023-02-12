@@ -1,0 +1,9 @@
+.ingredient {
+    composes: ml-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 8px;
+    width: 568px;
+}

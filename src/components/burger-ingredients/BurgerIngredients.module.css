@@ -1,0 +1,38 @@
+.container {
+    composes: pt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pb-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.header {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.tabs {
+    composes: mt-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mb-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    display: flex;
+}
+
+.group {
+    composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    margin: 0;
+    padding: 0;
+
+    height: calc(100vh - 56px - 40px - 40px);
+    overflow-y: auto;
+}
+
+.group::-webkit-scrollbar {
+    width: 8px;
+}
+
+.group::-webkit-scrollbar-thumb {
+    border: 3px solid #8585AD;
+    border-radius: unset;
+}

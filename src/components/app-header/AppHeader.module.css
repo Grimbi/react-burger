@@ -1,0 +1,33 @@
+.overlay {
+    composes: p-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: flex;
+    justify-content: center;
+    background-color: #1C1C21;
+    width: 100%;
+}
+
+.header {
+    composes: pt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-items: center;
+    width: 1280px;
+    box-sizing: border-box;
+}
+
+.navigation {
+    display: flex;
+    gap: 8px;
+}
+
+.first {
+    justify-self: start;
+}
+
+.last {
+    justify-self: end;
+}

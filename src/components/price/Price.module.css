@@ -1,0 +1,8 @@
+.container {
+    composes: mt-1 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mb-1 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
