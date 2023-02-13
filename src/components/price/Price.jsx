@@ -1,5 +1,6 @@
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Price.module.css";
+import PropTypes from "prop-types";
 
 function Price({value, extraClass}) {
     return (
@@ -9,5 +10,10 @@ function Price({value, extraClass}) {
         </div>
     );
 }
+
+Price.propTypes = {
+    value: PropTypes.number.isRequired,
+    extraClass: PropTypes.string,
+};
 
 export default Price;

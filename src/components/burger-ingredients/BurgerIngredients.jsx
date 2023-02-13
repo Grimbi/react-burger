@@ -3,6 +3,8 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INGREDIENT_TYPES} from "../../utils/Constants";
 import IngredientsGroup from "./IngredientsGroup";
 import styles from "./BurgerIngredients.module.css";
+import {BASKET_PROP_TYPE, INGREDIENTS_PROP_TYPE} from "../../utils/AppPropTypes";
+import PropTypes from "prop-types";
 
 function BurgerIngredients({ingredients, basket}) {
     const [current, setCurrent] = useState("bun");
@@ -29,7 +31,7 @@ function BurgerIngredients({ingredients, basket}) {
             <ul className={styles.group}>
                 {
                     INGREDIENT_TYPES.map(type => {
-                        const typedIngredients = ingredients.ingredients.filter(ingredient => ingredient.type === type);
+                        const typedIngredients = ingredients.filter(ingredient => ingredient.type === type);
                         return typedIngredients.length > 0 && (
                             <IngredientsGroup
                                 key={type}
@@ -45,5 +47,10 @@ function BurgerIngredients({ingredients, basket}) {
         </section>
     );
 }
+
+BurgerIngredients.propTypes = {
+    ingredients: INGREDIENTS_PROP_TYPE.isRequired,
+    basket: BASKET_PROP_TYPE.isRequired,
+};
 
 export default BurgerIngredients;

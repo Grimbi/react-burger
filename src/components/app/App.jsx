@@ -6,10 +6,8 @@ import {INITIAL_BASKET} from "../../utils/Data";
 import styles from './App.module.css';
 
 function App() {
-    const [ingredients, setIngredients] = useState({
-        ingredients: [],
-        ingredientsById: {},
-    });
+    const [ingredients, setIngredients] = useState([]);
+    const [ingredientsById, setIngredientsById] = useState({});
 
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
@@ -20,7 +18,10 @@ function App() {
         setIsLoading(true);
 
         fetch(INGREDIENTS_URL)
-            .then(result => result.json())
+            .then(response => response.ok
+                ? response.json()
+                : Promise.reject(`Ошибка: ${response.status}, ${response.statusText}`)
+            )
             .then(result => {
                 if (result.success) {
                     const ingredients = {};
@@ -28,12 +29,10 @@ function App() {
                         ingredients[ingredient._id] = ingredient;
                     });
 
-                    setIngredients({
-                        ingredients: result.data,
-                        ingredientsById: ingredients,
-                    });
+                    setIngredients(result.data);
+                    setIngredientsById(ingredients);
                 } else {
-                    console.log("Can't load ingredients");
+                    return Promise.reject("Can't load ingredients");
                 }
             })
             .catch(error => console.log(error))
@@ -43,7 +42,7 @@ function App() {
     return (
         <div className={styles.app}>
             <AppHeader/>
-            <AppMain ingredients={ingredients} basket={basket}/>
+            <AppMain ingredients={ingredients} ingredientsById={ingredientsById} basket={basket}/>
         </div>
     );
 }

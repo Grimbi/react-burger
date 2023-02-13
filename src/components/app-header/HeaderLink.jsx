@@ -1,9 +1,8 @@
+import PropTypes from 'prop-types';
 import styles from "./HeaderLink.module.css";
 
-function HeaderLink(props) {
-    const {type, extraClass, onClick, children} = props;
-
-    let className = type === "primary" ? styles.primary :styles.secondary;
+function HeaderLink({type, extraClass, onClick, children}) {
+    let className = type === "primary" ? styles.primary : styles.secondary;
 
     if (extraClass) {
         className = className + " " + extraClass;
@@ -15,5 +14,12 @@ function HeaderLink(props) {
         </a>
     );
 }
+
+HeaderLink.propTypes = {
+    type: PropTypes.oneOf(["primary", "secondary"]).isRequired,
+    extraClass: PropTypes.string,
+    onClick: PropTypes.func,
+    children: PropTypes.arrayOf(PropTypes.node).isRequired,
+};
 
 export default HeaderLink;

@@ -1,4 +1,6 @@
+import PropTypes from "prop-types";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
 import styles from "./Ingredient.module.css";
 
 function Ingredient({type, ingredient}) {
@@ -25,5 +27,10 @@ function Ingredient({type, ingredient}) {
         </div>
     )
 }
+
+Ingredient.propTypes = {
+    type: PropTypes.oneOf(["top", "bottom"]),
+    ingredient: INGREDIENT_PROP_TYPE.isRequired,
+};
 
 export default Ingredient;

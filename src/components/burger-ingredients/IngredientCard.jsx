@@ -1,19 +1,22 @@
-import styles from "./IngredientCard.module.css";
+import {useCallback, useState} from "react";
+import PropTypes from "prop-types";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import Price from "../price/Price";
-import {useMemo, useState} from "react";
 import IngredientDetails from "../ingredient-details/IngredientDetails";
+import Modal from "../modal/Modal";
+import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
+import styles from "./IngredientCard.module.css";
 
 function IngredientCard({ingredient, count}) {
     const [showDetails, setShowDetails] = useState(false);
 
-    const handleCardClick = useMemo(
-        () => () => setShowDetails(true),
+    const handleCardClick = useCallback(
+        () => setShowDetails(true),
     [setShowDetails]
     );
 
-    const handleDetailsClose = useMemo(
-        () => () => setShowDetails(false),
+    const handleDetailsClose = useCallback(
+        () => setShowDetails(false),
         [setShowDetails]
     );
 
@@ -25,9 +28,18 @@ function IngredientCard({ingredient, count}) {
                 <Price value={ingredient.price} extraClass={styles.price}/>
                 <p className={styles.name}>{ingredient.name}</p>
             </li>
-            {showDetails && (<IngredientDetails ingredient={ingredient} onClose={handleDetailsClose}/>)}
+            {showDetails && (
+                <Modal onClose={handleDetailsClose}>
+                    <IngredientDetails ingredient={ingredient}/>
+                </Modal>
+            )}
         </>
     );
 }
+
+IngredientCard.propTypes = {
+    ingredient: INGREDIENT_PROP_TYPE.isRequired,
+    count: PropTypes.number.isRequired,
+};
 
 export default IngredientCard;

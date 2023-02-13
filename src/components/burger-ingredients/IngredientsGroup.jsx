@@ -1,7 +1,8 @@
 import {forwardRef} from "react";
-import {INGREDIENT_TYPES_RU} from "../../utils/Constants";
 import IngredientCard from "./IngredientCard";
 import {getIngredientCount} from "../../utils/Utils";
+import {INGREDIENT_TYPES_RU} from "../../utils/Constants";
+import {BASKET_PROP_TYPE, INGREDIENT_TYPE_PROP_TYPE, INGREDIENTS_PROP_TYPE} from "../../utils/AppPropTypes";
 import styles from "./IngredientsGroup.module.css";
 
 const IngredientsGroup = forwardRef(({group, ingredients, basket}, ref) => {
@@ -20,5 +21,11 @@ const IngredientsGroup = forwardRef(({group, ingredients, basket}, ref) => {
         </li>
     );
 });
+
+IngredientsGroup.propTypes = {
+    group: INGREDIENT_TYPE_PROP_TYPE.isRequired,
+    ingredients: INGREDIENTS_PROP_TYPE.isRequired,
+    basket: BASKET_PROP_TYPE.isRequired,
+};
 
 export default IngredientsGroup;

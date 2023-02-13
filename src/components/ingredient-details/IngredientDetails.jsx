@@ -1,9 +1,10 @@
-import Modal from "../modal/Modal";
+import PropTypes from "prop-types";
+import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
 import styles from "./IngredientDetails.module.css";
 
-function IngredientDetails({ingredient, onClose}) {
+function IngredientDetails({ingredient}) {
     return (
-        <Modal onClose={onClose}>
+        <>
             <h2 className={styles.header}>Детали ингредиента</h2>
             <img className={styles.image} src={ingredient.image_large} alt={ingredient.name}/>
             <h3 className={styles.name}>{ingredient.name}</h3>
@@ -13,9 +14,13 @@ function IngredientDetails({ingredient, onClose}) {
                 <Nutrient header="Жиры, г" value={ingredient.fat}/>
                 <Nutrient header="Углеводы, г" value={ingredient.carbohydrates}/>
             </div>
-        </Modal>
+        </>
     );
 }
+
+IngredientDetails.propTypes = {
+    ingredient: INGREDIENT_PROP_TYPE.isRequired,
+};
 
 function Nutrient({header, value}) {
     return (
@@ -25,5 +30,10 @@ function Nutrient({header, value}) {
         </div>
     );
 }
+
+Nutrient.propTypes = {
+    header: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+};
 
 export default IngredientDetails;

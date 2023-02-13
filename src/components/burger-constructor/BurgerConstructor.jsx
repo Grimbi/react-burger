@@ -1,25 +1,28 @@
+import PropTypes from "prop-types";
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from "./Ingredient";
-import styles from "./BurgerConstructor.module.css";
 import Price from "../price/Price";
-import {useMemo, useState} from "react";
+import {useCallback, useState} from "react";
 import OrderDetails from "../order-details/OrderDetails";
+import Modal from "../modal/Modal";
+import {BASKET_PROP_TYPE} from "../../utils/AppPropTypes";
+import styles from "./BurgerConstructor.module.css";
 
-function BurgerConstructor({ingredients, basket}) {
+function BurgerConstructor({ingredientsById, basket}) {
     const [showOrder, setShowOrder] = useState(false);
 
-    const handleMakeOrder = useMemo(
-        () => () => setShowOrder(true),
+    const handleMakeOrder = useCallback(
+        () => setShowOrder(true),
         [setShowOrder]
     );
 
-    const handleCloseOrder = useMemo(
-        () => () => setShowOrder(false),
+    const handleCloseOrder = useCallback(
+        () => setShowOrder(false),
         [setShowOrder]
     );
 
     const buns = basket
-        .map(item => ingredients.ingredientsById[item.ingredient])
+        .map(item => ingredientsById[item.ingredient])
         .filter(ingredient => ingredient && ingredient.type === "bun");
 
     const bun = buns.length > 0 && buns[0];
@@ -31,7 +34,7 @@ function BurgerConstructor({ingredients, basket}) {
             {bun && (<Ingredient type="top" ingredient={bun}/>)}
             <ul className={styles.ingredients}>
                 {basket.map(item => {
-                    const ingredient = ingredients.ingredientsById[item.ingredient];
+                    const ingredient = ingredientsById[item.ingredient];
 
                     if (ingredient && ingredient.type !== "bun") {
                         total += ingredient.price;
@@ -54,9 +57,18 @@ function BurgerConstructor({ingredients, basket}) {
                     Оформить заказ
                 </Button>
             </div>
-            {showOrder && (<OrderDetails onClose={handleCloseOrder}/>)}
+            {showOrder && (
+                <Modal onClose={handleCloseOrder}>
+                    <OrderDetails/>
+                </Modal>
+            )}
         </section>
     );
 }
+
+BurgerConstructor.propTypes = {
+    ingredientsById: PropTypes.object.isRequired,
+    basket: BASKET_PROP_TYPE.isRequired,
+};
 
 export default BurgerConstructor;
