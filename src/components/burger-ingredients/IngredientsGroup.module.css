@@ -1,0 +1,19 @@
+.group {
+    list-style: none;
+    padding: 0;
+}
+
+.header {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.ingredients {
+    composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pl-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pr-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+}

@@ -1,0 +1,23 @@
+.order {
+    composes: pt-30 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_digits-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    margin: 0;
+}
+
+.identifier {
+    composes: pt-8 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pb-15 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.explanation {
+    composes: pt-15 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.remark {
+    composes: pt-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pb-30 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_color_inactive from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}

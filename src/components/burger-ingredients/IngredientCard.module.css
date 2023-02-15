@@ -1,0 +1,34 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.image {
+    composes: ml-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mr-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    object-fit: contain;
+    object-position: center;
+}
+
+.counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.name {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+    height: 48px;
+    text-align: center;
+}
+
+.price {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}

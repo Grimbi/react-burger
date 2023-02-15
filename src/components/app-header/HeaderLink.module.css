@@ -1,0 +1,29 @@
+.primary {
+    composes: pt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pr-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pl-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: flex;
+    gap: 8px;
+    border: none;
+    color: #F2F2F3;
+    background-color: transparent;
+    font-family: 'Jet Brains Mono', monospace;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration: none;
+    cursor: unset;
+}
+
+.secondary {
+    composes: primary;
+    color: #8585AD;
+    cursor: pointer;
+}
+
+.secondary:hover {
+    color: unset;
+    transition: color linear 0.3s;
+}
