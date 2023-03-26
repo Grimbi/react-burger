@@ -55,7 +55,7 @@ function Ingredient({type, id, ingredient}) {
 
 Ingredient.propTypes = {
     type: PropTypes.oneOf(["top", "bottom"]),
-    id: PropTypes.number,
+    id: PropTypes.string,
     ingredient: INGREDIENT_PROP_TYPE.isRequired,
 };
 

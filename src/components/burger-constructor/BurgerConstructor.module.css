@@ -46,3 +46,8 @@
 .submit {
     composes: ml-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 }
+
+.submitDisabled {
+    composes: submit;
+
+}

@@ -28,9 +28,11 @@ function IngredientCard({ingredient}) {
 
     const count = useMemo(
         () => {
-            return basket.ingredients
-                .filter(item => item.ingredient._id === ingredient._id)
-                .length;
+            return basket.bun && basket.bun._id === ingredient._id
+                ? 1
+                : basket.ingredients
+                    .filter(item => item.ingredient._id === ingredient._id)
+                    .length;
         },
         [basket, ingredient]
     );

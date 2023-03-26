@@ -6,30 +6,15 @@ export default createSlice({
     initialState: {
         bun: null,
         ingredients: [],
-        nextKey: 1,
     },
     extraReducers: (builder) => {
         builder
             .addCase(addIngredient, (state, action) => {
-                const ingredient = action.payload;
-                if (ingredient.type === "bun") {
-                    state.bun = ingredient;
-                    state.ingredients = [
-                        { id: state.nextKey + 1, ingredient },
-                        ...state.ingredients.filter(item => item.ingredient.type !== "bun"),
-                        { id: state.nextKey + 2, ingredient },
-                    ];
-                    state.nextKey += 2;
-                } else if (state.bun) {
-                    state.ingredients.splice(
-                        state.ingredients.length - 1,
-                        0,
-                        { id: state.nextKey + 1, ingredient }
-                    );
-                    state.nextKey++;
+                const item = action.payload;
+                if (item.ingredient.type === "bun") {
+                    state.bun = item.ingredient;
                 } else {
-                    state.ingredients.push({ id: state.nextKey + 1, ingredient });
-                    state.nextKey++;
+                    state.ingredients.push(item);
                 }
             })
             .addCase(removeIngredient, (state, action) => {

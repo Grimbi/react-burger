@@ -1,12 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {clear, setOrder} from "../actions/Order";
+import {clear, makeOrder} from "../actions/Order";
 
 export default createSlice({
     name: "order",
     initialState: null,
     extraReducers: (builder) => {
         builder
-            .addCase(setOrder, (state, action) => {
+            .addCase(makeOrder.fulfilled, (state, action) => {
                 return action.payload;
             })
             .addCase(clear, (state) => {
