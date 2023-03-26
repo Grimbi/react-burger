@@ -1,8 +1,10 @@
+import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
-import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
 import styles from "./IngredientDetails.module.css";
 
-function IngredientDetails({ingredient}) {
+function IngredientDetails() {
+    const ingredient = useSelector(store => store.selectedIngredient);
+
     return (
         <>
             <h2 className={styles.header}>Детали ингредиента</h2>
@@ -17,10 +19,6 @@ function IngredientDetails({ingredient}) {
         </>
     );
 }
-
-IngredientDetails.propTypes = {
-    ingredient: INGREDIENT_PROP_TYPE.isRequired,
-};
 
 function Nutrient({header, value}) {
     return (

@@ -1,36 +1,53 @@
-import {useCallback, useState} from "react";
-import PropTypes from "prop-types";
+import {useMemo} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useDrag} from "react-dnd";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import Price from "../price/Price";
 import IngredientDetails from "../ingredient-details/IngredientDetails";
 import Modal from "../modal/Modal";
 import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
+import {clear, setIngredient} from "../../services/actions/SelectedIngredient";
 import styles from "./IngredientCard.module.css";
 
-function IngredientCard({ingredient, count}) {
-    const [showDetails, setShowDetails] = useState(false);
+function IngredientCard({ingredient}) {
+    const dispatch = useDispatch();
 
-    const handleCardClick = useCallback(
-        () => setShowDetails(true),
-    [setShowDetails]
-    );
+    const basket = useSelector(store => store.basket);
+    const selectedIngredient = useSelector(store => store.selectedIngredient);
 
-    const handleDetailsClose = useCallback(
-        () => setShowDetails(false),
-        [setShowDetails]
+    const handleCardClick = () => dispatch(setIngredient(ingredient));
+    const handleDetailsClose = () => dispatch(clear());
+
+    const [{isDrag}, dragRef] = useDrag({
+        type: ingredient.type,
+        item: ingredient,
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    });
+
+    const count = useMemo(
+        () => {
+            return basket.bun && basket.bun._id === ingredient._id
+                ? 1
+                : basket.ingredients
+                    .filter(item => item.ingredient._id === ingredient._id)
+                    .length;
+        },
+        [basket, ingredient]
     );
 
     return (
         <>
-            <li className={styles.card} onClick={handleCardClick}>
+            <li className={isDrag ? styles.draggableCard : styles.card} onClick={handleCardClick} ref={dragRef}>
                 <img className={styles.image} src={ingredient.image} alt={ingredient.name}/>
-                {count !== 0 && <Counter count={count} size="default" extraClass={styles.counter} />}
+                {count !== 0 && <Counter count={count} size="default" extraClass={styles.counter}/>}
                 <Price value={ingredient.price} extraClass={styles.price}/>
                 <p className={styles.name}>{ingredient.name}</p>
             </li>
-            {showDetails && (
+            {selectedIngredient && (
                 <Modal onClose={handleDetailsClose}>
-                    <IngredientDetails ingredient={ingredient}/>
+                    <IngredientDetails/>
                 </Modal>
             )}
         </>
@@ -39,7 +56,6 @@ function IngredientCard({ingredient, count}) {
 
 IngredientCard.propTypes = {
     ingredient: INGREDIENT_PROP_TYPE.isRequired,
-    count: PropTypes.number.isRequired,
 };
 
 export default IngredientCard;

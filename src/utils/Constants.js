@@ -7,3 +7,4 @@ export const INGREDIENT_TYPES_RU = {
 };
 
 export const INGREDIENTS_URL = "https://norma.nomoreparties.space/api/ingredients";
+export const ORDER_URL = "https://norma.nomoreparties.space/api/orders";

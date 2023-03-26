@@ -7,3 +7,8 @@
     gap: 8px;
     width: 568px;
 }
+
+.draggingIngredient {
+    composes: ingredient;
+    opacity: 0.4;
+}

@@ -6,6 +6,11 @@
     width: 100%;
 }
 
+.draggableCard {
+    composes: card;
+    opacity: 0.3;
+}
+
 .image {
     composes: ml-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
     composes: mr-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';

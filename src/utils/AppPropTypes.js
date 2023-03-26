@@ -15,15 +15,6 @@ export const INGREDIENT_PROP_TYPE = PropTypes.shape({
     carbohydrates: PropTypes.number.isRequired,
 });
 
-export const INGREDIENTS_PROP_TYPE = PropTypes.arrayOf(INGREDIENT_PROP_TYPE);
-
-export const BASKET_ITEM_PROP_TYPE = PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    ingredient: PropTypes.string.isRequired,
-});
-
-export const BASKET_PROP_TYPE = PropTypes.arrayOf(BASKET_ITEM_PROP_TYPE);
-
 export const CHILDREN_PROP_TYPE = PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
