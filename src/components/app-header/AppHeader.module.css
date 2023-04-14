@@ -1,6 +1,4 @@
 .overlay {
-    composes: p-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-
     display: flex;
     justify-content: center;
     background-color: #1C1C21;

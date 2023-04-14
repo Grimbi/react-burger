@@ -1,0 +1,16 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    composes: pt-30 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.title {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.message {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}

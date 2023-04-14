@@ -1,9 +1,15 @@
+.listItem {
+    list-style-type: none;
+}
+
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     width: 100%;
+    color: #F2F2F3;
+    text-decoration: none;
 }
 
 .draggableCard {

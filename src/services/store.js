@@ -2,14 +2,14 @@ import {configureStore} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import ingredientsSlice from "./reducers/Ingredients";
 import basketSlice from "./reducers/Basket";
-import selectedIngredientSlice from "./reducers/SelectedIngredient";
 import orderSlice from "./reducers/Order";
+import userSlice from "./reducers/User";
 
 const rootReducer = {
     ingredients: ingredientsSlice.reducer,
     basket: basketSlice.reducer,
-    selectedIngredient: selectedIngredientSlice.reducer,
     order: orderSlice.reducer,
+    user: userSlice.reducer,
 };
 
 export const store = configureStore({

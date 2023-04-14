@@ -1,0 +1,37 @@
+.page {
+    display: grid;
+    grid-template-columns: 320px 480px 320px;
+    gap: 60px;
+    margin-top: 120px;
+}
+
+.inactiveLink {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    display: flex;
+    align-items: center;
+    height: 64px;
+    cursor: pointer;
+    color: #8585AD;
+    transition: color linear 0.3s;
+}
+
+.inactiveLink:hover {
+    color: #F2F2F3;
+}
+
+.activeLink {
+    composes: inactiveLink;
+    color: #F2F2F3;
+    cursor: unset;
+}
+
+.description {
+    composes: text_type_main-small from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    color: #8585AD;
+    margin: 80px 0 0;
+}
+
+.form {
+
+}

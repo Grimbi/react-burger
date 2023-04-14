@@ -1,14 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {INGREDIENTS_URL} from "../../utils/Constants";
+import {API_URL, INGREDIENTS_URL} from "../../utils/Constants";
+import {checkResponse} from "../../utils/Utils";
 
 export const fetchIngredients = createAsyncThunk(
     'users/fetchIngredients',
     async () => {
-        return fetch(INGREDIENTS_URL)
-            .then(response => response.ok
-                ? response.json()
-                : Promise.reject(`Ошибка: ${response.status}, ${response.statusText}`)
-            )
+        return fetch(`${API_URL}${INGREDIENTS_URL}`)
+            .then(checkResponse)
             .then(result => result.success
                 ? Promise.resolve(result.data)
                 : Promise.reject("Can't parse ingredients json")

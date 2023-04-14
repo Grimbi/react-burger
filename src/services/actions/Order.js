@@ -1,5 +1,6 @@
 import {createAction, createAsyncThunk} from "@reduxjs/toolkit";
-import {ORDER_URL} from "../../utils/Constants";
+import {API_URL, ORDER_URL} from "../../utils/Constants";
+import {checkResponse} from "../../utils/Utils";
 
 export const makeOrder = createAsyncThunk(
     'order/makeOrder',
@@ -10,16 +11,11 @@ export const makeOrder = createAsyncThunk(
             body: JSON.stringify({ingredients}),
         };
 
-        return fetch(ORDER_URL, request)
-            .then(response => response.ok
-                ? response.json()
-                : Promise.reject(`Ошибка: ${response.status}, ${response.statusText}`)
-            )
-            .then(result => {
-                    return result.success
-                        ? Promise.resolve(result)
-                        : Promise.reject("Can't parse ingredients json")
-                }
+        return fetch(`${API_URL}${ORDER_URL}`, request)
+            .then(checkResponse)
+            .then(result => result.success
+                ? Promise.resolve(result)
+                : Promise.reject("Can't parse ingredients json")
             )
             .catch(error => console.log(error));
     }

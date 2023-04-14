@@ -1,4 +1,5 @@
 import {useCallback, useMemo, useRef} from "react";
+import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -14,6 +15,9 @@ import styles from "./BurgerConstructor.module.css";
 const DRAGGABLE_INGREDIENT_TYPES = [...INGREDIENT_TYPES, "basket-item"];
 
 function BurgerConstructor() {
+    const navigate = useNavigate();
+
+    const user = useSelector(store => store.user.user);
     const basket = useSelector(store => store.basket);
     const order = useSelector(store => store.order);
 
@@ -21,15 +25,19 @@ function BurgerConstructor() {
 
     const handleMakeOrder = useCallback(
         () => {
-            const ingredients = [
-                basket.bun._id,
-                ...basket.ingredients.map(item => item.ingredient._id),
-                basket.bun._id,
-            ];
+            if (user) {
+                const ingredients = [
+                    basket.bun._id,
+                    ...basket.ingredients.map(item => item.ingredient._id),
+                    basket.bun._id,
+                ];
 
-            dispatch(makeOrder(ingredients));
+                dispatch(makeOrder(ingredients));
+            } else {
+                navigate("/login");
+            }
         },
-        [basket, dispatch]
+        [user, basket, dispatch, navigate]
     );
 
     const handleCloseOrder = useCallback(
