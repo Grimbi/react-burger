@@ -4,14 +4,15 @@ import styles from "./ProfilePage.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../utils/Utils";
 import {clear} from "../../services/actions/User";
+import {selectors} from "../../services/store";
 
 function ProfilePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const userData = useSelector(store => store.user.user);
+    const {user} = useSelector(selectors.getUser);
 
-    if (!userData) {
+    if (!user) {
         return (<Navigate to={"/login"} state={{ previousPath: "/profile" }}/>);
     }
 

@@ -8,7 +8,7 @@ function FieldsForm({title, submitTitle, handleSubmit, children}) {
     };
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={submitHandler}>
             <h2 className={styles.title}>{title}</h2>
             {children}
             <Button
@@ -16,7 +16,6 @@ function FieldsForm({title, submitTitle, handleSubmit, children}) {
                 type="primary"
                 size="medium"
                 extraClass={styles.button}
-                onClick={submitHandler}
             >
                 {submitTitle}
             </Button>

@@ -19,12 +19,12 @@ export const checkResponse = async (response) => {
         return response.json();
     }
 
-    let error = `Error: ${response.status}`;
-    if (response.statusText) {
-        error = error + ", " + response.statusText;
-    }
-
-    return Promise.reject(error);
+    return response.json()
+        .then((err) => {
+            const error = new Error(err.message);
+            error.status = response.status;
+            throw error;
+        });
 };
 
 export const sendRequest = async (url, options) => {

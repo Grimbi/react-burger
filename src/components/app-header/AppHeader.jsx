@@ -1,11 +1,12 @@
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import HeaderLink from "./HeaderLink";
+import {selectors} from "../../services/store";
 import styles from './AppHeader.module.css';
 
 function AppHeader() {
-    const user = useSelector(store => store.user.user);
+    const {user} = useSelector(selectors.getUser);
 
     const location = useLocation();
 
@@ -26,7 +27,9 @@ function AppHeader() {
                         Лента заказов
                     </HeaderLink>
                 </nav>
-                <Logo/>
+                <Link to={"/"}>
+                    <Logo/>
+                </Link>
                 <HeaderLink type={profileType} to={"/profile"} extraClass={styles.last}>
                     <ProfileIcon type={profileType}/>
                     {user?.name || "Личный кабинет"}

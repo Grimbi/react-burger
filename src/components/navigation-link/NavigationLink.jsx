@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./NavigationLink.module.css";
 
 function NavigationLink({label, link, to}) {
@@ -9,5 +10,11 @@ function NavigationLink({label, link, to}) {
         </div>
     );
 }
+
+NavigationLink.propTypes = {
+    label: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+};
 
 export default NavigationLink;

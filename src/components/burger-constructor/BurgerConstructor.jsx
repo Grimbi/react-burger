@@ -10,6 +10,7 @@ import Modal from "../modal/Modal";
 import {clear, makeOrder} from "../../services/actions/Order";
 import {INGREDIENT_TYPES} from "../../utils/Constants";
 import {addIngredient, shiftIngredient} from "../../services/actions/Basket";
+import {selectors} from "../../services/store";
 import styles from "./BurgerConstructor.module.css";
 
 const DRAGGABLE_INGREDIENT_TYPES = [...INGREDIENT_TYPES, "basket-item"];
@@ -17,9 +18,9 @@ const DRAGGABLE_INGREDIENT_TYPES = [...INGREDIENT_TYPES, "basket-item"];
 function BurgerConstructor() {
     const navigate = useNavigate();
 
-    const user = useSelector(store => store.user.user);
-    const basket = useSelector(store => store.basket);
-    const order = useSelector(store => store.order);
+    const {user} = useSelector(selectors.getUser);
+    const basket = useSelector(selectors.getBasket);
+    const order = useSelector(selectors.getOrder);
 
     const dispatch = useDispatch();
 

@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import AppHeader from "../app-header/AppHeader";
 import MainPage from "../../pages/main/MainPage";
 import LoginPage from "../../pages/login/LoginPage";
@@ -19,6 +19,7 @@ import styles from './App.module.css';
 import {getUserProfile} from "../../utils/Utils";
 import {setIsAuthChecked, setUser} from "../../services/actions/User";
 import ProtectedRouteElement from "../protected-route-element/ProtectedRouteElement";
+import {selectors} from "../../services/store";
 
 function App() {
     const dispatch = useDispatch();
@@ -43,6 +44,8 @@ function App() {
         }
     }, [dispatch]);
 
+    const {isWaitingReset} = useSelector(selectors.getUser);
+
     const handleModalClose = () => navigate(-1);
 
     return (
@@ -65,11 +68,13 @@ function App() {
                         <ForgotPasswordPage/>
                     </ProtectedRouteElement>
                 }/>
-                <Route path="/reset-password" element={
-                    <ProtectedRouteElement onlyUnAuth={true}>
-                        <ResetPasswordPage/>
-                    </ProtectedRouteElement>
-                }/>
+                {isWaitingReset && (
+                    <Route path="/reset-password" element={
+                        <ProtectedRouteElement onlyUnAuth={true}>
+                            <ResetPasswordPage/>
+                        </ProtectedRouteElement>
+                    }/>
+                )}
                 <Route path="/profile" element={
                     <ProtectedRouteElement>
                         <ProfilePage/>

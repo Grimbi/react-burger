@@ -2,11 +2,12 @@ import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./IngredientDetails.module.css";
+import {selectors} from "../../services/store";
 
 function IngredientDetails({modal = false}) {
     const {id} = useParams();
 
-    const items = useSelector(store => store.ingredients.items);
+    const {items} = useSelector(selectors.getIngredients);
     const ingredient = items.find(item => item._id === id);
 
     if (!ingredient) {
@@ -27,6 +28,10 @@ function IngredientDetails({modal = false}) {
         </>
     );
 }
+
+IngredientDetails.propTypes = {
+    modal: PropTypes.bool,
+};
 
 function Nutrient({header, value}) {
     return (

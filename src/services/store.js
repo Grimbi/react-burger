@@ -17,3 +17,10 @@ export const store = configureStore({
     middleware: [thunk],
     devTools: process.env.NODE_ENV !== 'production',
 });
+
+export const selectors = {
+    getUser: (store) => store.user,
+    getBasket: store => store.basket,
+    getIngredients: store => store.ingredients,
+    getOrder: store => store.order,
+};

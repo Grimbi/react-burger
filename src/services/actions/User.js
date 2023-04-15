@@ -27,4 +27,11 @@ export const setIsAuthChecked = createAction(
     }
 );
 
+export const setIsWaitingReset = createAction(
+    "user/setWaitingReset",
+    (flag) => {
+        return {payload: flag};
+    }
+);
+
 export const clear = createAction("user/clear");

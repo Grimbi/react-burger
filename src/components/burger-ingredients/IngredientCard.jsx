@@ -5,11 +5,12 @@ import {useDrag} from "react-dnd";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import Price from "../price/Price";
 import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
+import {selectors} from "../../services/store";
 import styles from "./IngredientCard.module.css";
 
 function IngredientCard({ingredient}) {
     const location = useLocation();
-    const basket = useSelector(store => store.basket);
+    const basket = useSelector(selectors.getBasket);
 
     const [{isDrag}, dragRef] = useDrag({
         type: ingredient.type,
