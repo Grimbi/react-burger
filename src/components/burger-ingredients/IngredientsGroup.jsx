@@ -3,14 +3,15 @@ import {useSelector} from "react-redux";
 import IngredientCard from "./IngredientCard";
 import {INGREDIENT_TYPES_RU} from "../../utils/Constants";
 import {INGREDIENT_TYPE_PROP_TYPE} from "../../utils/AppPropTypes";
+import {selectors} from "../../services/store";
 import styles from "./IngredientsGroup.module.css";
 
 const IngredientsGroup = forwardRef(({group}, ref) => {
-    const ingredients = useSelector(store => store.ingredients.items);
+    const {items} = useSelector(selectors.getIngredients);
 
     const groupIngredients = useMemo(
-        () => ingredients.filter(ingredient => ingredient.type === group),
-        [group, ingredients]
+        () => items.filter(ingredient => ingredient.type === group),
+        [group, items]
     );
 
     return (

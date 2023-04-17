@@ -1,22 +1,11 @@
-import {useEffect, useRef, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useRef, useState} from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INGREDIENT_TYPES} from "../../utils/Constants";
 import IngredientsGroup from "./IngredientsGroup";
-import {fetchIngredients} from "../../services/actions/Ingredients";
 import styles from "./BurgerIngredients.module.css";
 
 function BurgerIngredients() {
     const [current, setCurrent] = useState("bun");
-
-    const dispatch = useDispatch();
-
-    useEffect(
-        () => {
-            dispatch(fetchIngredients());
-        },
-        [dispatch]
-    );
 
     const groupRefs = {
         bun: useRef(),

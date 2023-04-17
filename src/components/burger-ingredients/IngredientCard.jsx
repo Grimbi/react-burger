@@ -1,22 +1,16 @@
 import {useMemo} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {Link, useLocation} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import Price from "../price/Price";
-import IngredientDetails from "../ingredient-details/IngredientDetails";
-import Modal from "../modal/Modal";
 import {INGREDIENT_PROP_TYPE} from "../../utils/AppPropTypes";
-import {clear, setIngredient} from "../../services/actions/SelectedIngredient";
+import {selectors} from "../../services/store";
 import styles from "./IngredientCard.module.css";
 
 function IngredientCard({ingredient}) {
-    const dispatch = useDispatch();
-
-    const basket = useSelector(store => store.basket);
-    const selectedIngredient = useSelector(store => store.selectedIngredient);
-
-    const handleCardClick = () => dispatch(setIngredient(ingredient));
-    const handleDetailsClose = () => dispatch(clear());
+    const location = useLocation();
+    const basket = useSelector(selectors.getBasket);
 
     const [{isDrag}, dragRef] = useDrag({
         type: ingredient.type,
@@ -38,19 +32,18 @@ function IngredientCard({ingredient}) {
     );
 
     return (
-        <>
-            <li className={isDrag ? styles.draggableCard : styles.card} onClick={handleCardClick} ref={dragRef}>
+        <li className={styles.listItem} ref={dragRef}>
+            <Link
+                to={`/ingredients/${ingredient._id}`}
+                state={{ background: location }}
+                className={isDrag ? styles.draggableCard : styles.card}
+            >
                 <img className={styles.image} src={ingredient.image} alt={ingredient.name}/>
                 {count !== 0 && <Counter count={count} size="default" extraClass={styles.counter}/>}
                 <Price value={ingredient.price} extraClass={styles.price}/>
                 <p className={styles.name}>{ingredient.name}</p>
-            </li>
-            {selectedIngredient && (
-                <Modal onClose={handleDetailsClose}>
-                    <IngredientDetails/>
-                </Modal>
-            )}
-        </>
+            </Link>
+        </li>
     );
 }
 

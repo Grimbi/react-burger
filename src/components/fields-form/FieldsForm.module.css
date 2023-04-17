@@ -1,0 +1,17 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+    padding-top: 180px;
+}
+
+.title {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    color: #F2F2F3;
+}
+
+.button {
+    composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}

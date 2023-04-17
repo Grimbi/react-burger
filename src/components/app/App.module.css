@@ -3,5 +3,6 @@
     flex-direction: column;
     align-items: center;
     composes: p-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: pt-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
     background-color: #131316;
 }

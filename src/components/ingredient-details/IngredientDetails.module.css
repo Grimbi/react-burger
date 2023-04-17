@@ -1,10 +1,18 @@
-.header {
+.modalHeader {
     composes: ml-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
     composes: mr-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
     margin-bottom: 0;
     composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
     margin-top: 52px;
     align-self: start;
+}
+
+.header {
+    composes: mt-30 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: ml-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mr-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    margin-bottom: 0;
+    composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 }
 
 .image {

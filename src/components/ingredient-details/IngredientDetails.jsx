@@ -1,13 +1,22 @@
 import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./IngredientDetails.module.css";
+import {selectors} from "../../services/store";
 
-function IngredientDetails() {
-    const ingredient = useSelector(store => store.selectedIngredient);
+function IngredientDetails({modal = false}) {
+    const {id} = useParams();
+
+    const {items} = useSelector(selectors.getIngredients);
+    const ingredient = items.find(item => item._id === id);
+
+    if (!ingredient) {
+        return (<></>);
+    }
 
     return (
         <>
-            <h2 className={styles.header}>Детали ингредиента</h2>
+            <h2 className={modal ? styles.modalHeader : styles.header}>Детали ингредиента</h2>
             <img className={styles.image} src={ingredient.image_large} alt={ingredient.name}/>
             <h3 className={styles.name}>{ingredient.name}</h3>
             <div className={styles.nutrients}>
@@ -19,6 +28,10 @@ function IngredientDetails() {
         </>
     );
 }
+
+IngredientDetails.propTypes = {
+    modal: PropTypes.bool,
+};
 
 function Nutrient({header, value}) {
     return (

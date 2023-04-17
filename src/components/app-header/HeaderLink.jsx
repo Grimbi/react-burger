@@ -1,7 +1,9 @@
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import styles from "./HeaderLink.module.css";
+import {CHILDREN_PROP_TYPE} from "../../utils/AppPropTypes";
 
-function HeaderLink({type, extraClass, onClick, children}) {
+function HeaderLink({type, to, extraClass, children}) {
     let className = type === "primary" ? styles.primary : styles.secondary;
 
     if (extraClass) {
@@ -9,17 +11,17 @@ function HeaderLink({type, extraClass, onClick, children}) {
     }
 
     return (
-        <a className={className} onClick={onClick}>
+        <Link to={to} className={className}>
             {children}
-        </a>
+        </Link>
     );
 }
 
 HeaderLink.propTypes = {
     type: PropTypes.oneOf(["primary", "secondary"]).isRequired,
+    to: PropTypes.string,
     extraClass: PropTypes.string,
-    onClick: PropTypes.func,
-    children: PropTypes.arrayOf(PropTypes.node).isRequired,
+    children: CHILDREN_PROP_TYPE.isRequired,
 };
 
 export default HeaderLink;
