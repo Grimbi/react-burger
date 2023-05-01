@@ -1,12 +1,12 @@
-import {useState} from "react";
+import {FC, useState} from "react";
 import {EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import FieldsForm from "../../components/fields-form/FieldsForm";
-import NavigationLink from "../../components/navigation-link/NavigationLink";
+import {FieldsForm} from "../../components/fields-form/FieldsForm";
+import {NavigationLink} from "../../components/navigation-link/NavigationLink";
 import {userLogin} from "../../services/actions/User";
 import {useAppDispatch} from "../../services/store";
 import styles from "./LoginPage.module.css";
 
-function LoginPage() {
+export const LoginPage: FC = () => {
     const dispatch = useAppDispatch();
 
     const [email, setEmail] = useState("");
@@ -42,5 +42,3 @@ function LoginPage() {
         </>
     );
 }
-
-export default LoginPage;

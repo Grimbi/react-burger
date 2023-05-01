@@ -1,10 +1,11 @@
+import {FC} from "react";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
-import BurgerIngredients from "../../components/burger-ingredients/BurgerIngredients";
-import BurgerConstructor from "../../components/burger-constructor/BurgerConstructor";
+import {BurgerIngredients} from "../../components/burger-ingredients/BurgerIngredients";
+import {BurgerConstructor} from "../../components/burger-constructor/BurgerConstructor";
 import styles from "./MainPage.module.css";
 
-function MainPage() {
+export const MainPage: FC = () => {
     return (
         <>
             <main className={styles.main}>
@@ -16,5 +17,3 @@ function MainPage() {
         </>
     );
 }
-
-export default MainPage;

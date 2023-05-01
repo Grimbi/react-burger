@@ -1,10 +1,10 @@
-import {useCallback, useRef} from "react";
+import {FC, useCallback, useRef} from "react";
 import {useDrag} from "react-dnd";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {removeIngredient} from "../../services/actions/Basket";
-import styles from "./Ingredient.module.css";
-import {IIngredient} from "../../models/Ingredients";
 import {useAppDispatch} from "../../services/store";
+import {removeIngredient} from "../../services/actions/Basket";
+import {IIngredient} from "../../models/Ingredients";
+import styles from "./Ingredient.module.css";
 
 interface IIngredientProps {
     type?: "top" | "bottom";
@@ -12,7 +12,9 @@ interface IIngredientProps {
     ingredient: IIngredient;
 }
 
-function Ingredient({type, id, ingredient}: IIngredientProps) {
+export const Ingredient: FC<IIngredientProps> = (
+    {type, id, ingredient}
+) => {
     const dispatch = useAppDispatch();
 
     let name = ingredient.name;
@@ -57,5 +59,3 @@ function Ingredient({type, id, ingredient}: IIngredientProps) {
         </div>
     )
 }
-
-export default Ingredient;

@@ -1,18 +1,18 @@
-import {useMemo} from "react";
+import {FC, useMemo} from "react";
 import {Link, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
-import Price from "../price/Price";
+import {Price} from "../price/Price";
 import {getBasketSelector} from "../../services/store";
-import styles from "./IngredientCard.module.css";
 import {IIngredient} from "../../models/Ingredients";
+import styles from "./IngredientCard.module.css";
 
 interface IIngredientCardProps {
     ingredient: IIngredient;
 }
 
-function IngredientCard({ingredient}: IIngredientCardProps) {
+export const IngredientCard: FC<IIngredientCardProps> = ({ingredient}) => {
     const location = useLocation();
     const basket = useSelector(getBasketSelector);
 
@@ -50,5 +50,3 @@ function IngredientCard({ingredient}: IIngredientCardProps) {
         </li>
     );
 }
-
-export default IngredientCard;

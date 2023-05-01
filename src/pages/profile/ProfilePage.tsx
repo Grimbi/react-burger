@@ -1,12 +1,13 @@
-import React from "react";
+import React, {FC} from "react";
 import {Navigate, Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {logout} from "../../utils/Utils";
 import {clear} from "../../services/actions/User";
 import {getUserSelector, useAppDispatch} from "../../services/store";
+import {logout} from "../../utils/ServerApi";
+import {logErrorDescription} from "../../utils/Utils";
 import styles from "./ProfilePage.module.css";
 
-function ProfilePage() {
+export const ProfilePage: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -21,12 +22,8 @@ function ProfilePage() {
 
     const handleExit = () => {
         logout()
-            .then(() => {
-                localStorage.removeItem("accessToken");
-                localStorage.removeItem("refreshToken");
-                dispatch(clear());
-            })
-            .catch(error => console.log(error));
+            .then(() => dispatch(clear()))
+            .catch(error => logErrorDescription(error));
     };
 
     return (
@@ -48,11 +45,9 @@ interface INavigationLinkProps {
     onClick: () => void;
 }
 
-function NavigationLink({to, name, onClick}: INavigationLinkProps) {
+const NavigationLink: FC<INavigationLinkProps> = ({to, name, onClick}) => {
     const location = useLocation();
     return location.pathname === to
         ? (<p className={styles.activeLink}>{name}</p>)
         : (<p className={styles.inactiveLink} onClick={onClick}>{name}</p>);
 }
-
-export default ProfilePage;

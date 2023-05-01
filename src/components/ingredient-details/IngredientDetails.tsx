@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {getIngredientsSelector} from "../../services/store";
@@ -11,7 +12,7 @@ type TIngredientDetailsParams = {
     id: string;
 }
 
-function IngredientDetails({modal = false}: IIngredientDetailsProps) {
+export const IngredientDetails: FC<IIngredientDetailsProps> = ({modal = false}) => {
     const {id} = useParams<TIngredientDetailsParams>();
 
     const {items} = useSelector(getIngredientsSelector);
@@ -41,7 +42,7 @@ interface INutrientProps {
     value: number;
 }
 
-function Nutrient({header, value}: INutrientProps) {
+const Nutrient: FC<INutrientProps> = ({header, value}) => {
     return (
         <div className={styles.nutrient}>
             <span>{header}</span>
@@ -49,5 +50,3 @@ function Nutrient({header, value}: INutrientProps) {
         </div>
     );
 }
-
-export default IngredientDetails;

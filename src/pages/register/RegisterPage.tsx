@@ -1,18 +1,20 @@
-import {ChangeEvent, useCallback, useState} from "react";
+import {ChangeEvent, FC, useCallback, useState} from "react";
 import {EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import FieldsForm from "../../components/fields-form/FieldsForm";
-import NavigationLink from "../../components/navigation-link/NavigationLink";
+import {FieldsForm} from "../../components/fields-form/FieldsForm";
+import {NavigationLink} from "../../components/navigation-link/NavigationLink";
 import {userRegister} from "../../services/actions/User";
 import {IUserWithPassword} from "../../models/User";
 import {useAppDispatch} from "../../services/store";
 import styles from "../login/LoginPage.module.css";
 
-function RegisterPage() {
-    const [user, setUser] = useState<IUserWithPassword>({
-        name: "",
-        email: "",
-        password: "",
-    });
+const userInitialState: IUserWithPassword = {
+    name: "",
+    email: "",
+    password: "",
+}
+
+export const RegisterPage: FC = () => {
+    const [user, setUser] = useState(userInitialState);
 
     const dispatch = useAppDispatch();
 
@@ -65,5 +67,3 @@ function RegisterPage() {
         </>
     );
 }
-
-export default RegisterPage;

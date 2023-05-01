@@ -1,27 +1,28 @@
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import AppHeader from "../app-header/AppHeader";
-import MainPage from "../../pages/main/MainPage";
-import LoginPage from "../../pages/login/LoginPage";
-import RegisterPage from "../../pages/register/RegisterPage";
-import ForgotPasswordPage from "../../pages/forgot-password/ForgotPasswordPage";
-import ResetPasswordPage from "../../pages/reset-password/ResetPasswordPage";
-import ProfilePage from "../../pages/profile/ProfilePage";
-import OrderFeedPage from "../../pages/order-feed/OrderFeedPage";
-import ProfileEditor from "../profile-editor/ProfileEditor";
-import Orders from "../orders/Orders";
-import PageNotFound from "../../pages/page-not-found/PageNotFound";
-import IngredientDetails from "../ingredient-details/IngredientDetails";
-import Modal from "../modal/Modal";
+import {AppHeader} from "../app-header/AppHeader";
+import {MainPage} from "../../pages/main/MainPage";
+import {LoginPage} from "../../pages/login/LoginPage";
+import {RegisterPage} from "../../pages/register/RegisterPage";
+import {ForgotPasswordPage} from "../../pages/forgot-password/ForgotPasswordPage";
+import {ResetPasswordPage} from "../../pages/reset-password/ResetPasswordPage";
+import {ProfilePage} from "../../pages/profile/ProfilePage";
+import {OrderFeedPage} from "../../pages/order-feed/OrderFeedPage";
+import {ProfileEditor} from "../profile-editor/ProfileEditor";
+import {Orders} from "../orders/Orders";
+import {PageNotFound} from "../../pages/page-not-found/PageNotFound";
+import {IngredientDetails} from "../ingredient-details/IngredientDetails";
+import {Modal} from "../modal/Modal";
 import {fetchIngredients} from "../../services/actions/Ingredients";
-import styles from './App.module.css';
-import {getUserProfile} from "../../utils/Utils";
 import {setIsAuthChecked, setUser} from "../../services/actions/User";
-import ProtectedRouteElement from "../protected-route-element/ProtectedRouteElement";
+import {ProtectedRouteElement} from "../protected-route-element/ProtectedRouteElement";
 import {getUserSelector, useAppDispatch} from "../../services/store";
+import {getUserProfile} from "../../utils/ServerApi";
+import {logErrorDescription} from "../../utils/Utils";
+import styles from './App.module.css';
 
-function App() {
+export const App: FC = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ function App() {
                 .catch(error => {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
-                    console.log(error);
+                    logErrorDescription(error);
                 });
         } else {
             dispatch(setIsAuthChecked(true));
@@ -105,5 +106,3 @@ function App() {
         </div>
     );
 }
-
-export default App;

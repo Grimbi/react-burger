@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Price.module.css";
 
@@ -6,7 +7,7 @@ interface IPriceProps {
     extraClass: string;
 }
 
-function Price({value, extraClass}: IPriceProps) {
+export const Price: FC<IPriceProps> = ({value, extraClass}) => {
     return (
         <div className={styles.container}>
             <span className={extraClass}>{value}</span>
@@ -14,5 +15,3 @@ function Price({value, extraClass}: IPriceProps) {
         </div>
     );
 }
-
-export default Price;

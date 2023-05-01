@@ -1,10 +1,10 @@
-import {useRef, useState} from "react";
+import {FC, useRef, useState} from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {IngredientTypes} from "../../models/Ingredients";
-import IngredientsGroup from "./IngredientsGroup";
+import {IngredientsGroup} from "./IngredientsGroup";
 import styles from "./BurgerIngredients.module.css";
 
-function BurgerIngredients() {
+export const BurgerIngredients: FC = () => {
     const [current, setCurrent] = useState(IngredientTypes.bun);
 
     const bunGroupRef = useRef<HTMLLIElement>(null);
@@ -71,5 +71,3 @@ function BurgerIngredients() {
         </section>
     );
 }
-
-export default BurgerIngredients;

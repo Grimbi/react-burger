@@ -1,14 +1,15 @@
-import {useState} from "react";
+import {FC, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import FieldsForm from "../../components/fields-form/FieldsForm";
-import NavigationLink from "../../components/navigation-link/NavigationLink";
-import {finishResetPassword} from "../../utils/Utils";
+import {FieldsForm} from "../../components/fields-form/FieldsForm";
+import {NavigationLink} from "../../components/navigation-link/NavigationLink";
 import {setIsWaitingReset} from "../../services/actions/User";
 import {useAppDispatch} from "../../services/store";
+import {finishResetPassword} from "../../utils/ServerApi";
+import {logErrorDescription} from "../../utils/Utils";
 import styles from "../login/LoginPage.module.css";
 
-function ResetPasswordPage() {
+export const ResetPasswordPage: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -21,7 +22,7 @@ function ResetPasswordPage() {
                 navigate("/login");
                 dispatch(setIsWaitingReset(false));
             })
-            .catch(error => console.log(error));
+            .catch(error => logErrorDescription(error));
     };
 
     return (
@@ -55,5 +56,3 @@ function ResetPasswordPage() {
         </>
     );
 }
-
-export default ResetPasswordPage;

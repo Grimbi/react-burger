@@ -1,4 +1,4 @@
-import {FormEvent, ReactNode} from "react";
+import {FC, FormEvent, ReactNode} from "react";
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./FieldsForm.module.css";
 
@@ -9,7 +9,9 @@ interface IFieldsFormProps {
     children: ReactNode;
 }
 
-function FieldsForm({title, submitTitle, handleSubmit, children}: IFieldsFormProps) {
+export const FieldsForm: FC<IFieldsFormProps> = (
+    {title, submitTitle, handleSubmit, children}
+) => {
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
         handleSubmit();
@@ -30,5 +32,3 @@ function FieldsForm({title, submitTitle, handleSubmit, children}: IFieldsFormPro
         </form>
     );
 }
-
-export default FieldsForm;

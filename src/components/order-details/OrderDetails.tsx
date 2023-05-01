@@ -1,9 +1,10 @@
+import {FC} from "react";
 import {useSelector} from "react-redux";
 import {getOrderSelector} from "../../services/store";
 import styles from "./OrderDetails.module.css";
 import doneImage from "../../images/done.svg";
 
-function OrderDetails() {
+export const OrderDetails: FC = () => {
     const order = useSelector(getOrderSelector);
     return (
         <>
@@ -15,5 +16,3 @@ function OrderDetails() {
         </>
     );
 }
-
-export default OrderDetails;

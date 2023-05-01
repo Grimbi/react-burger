@@ -10,3 +10,4 @@ export type TShiftIngredientPayload = {
 };
 
 export const shiftIngredient = createAction<TShiftIngredientPayload>("basket/shiftIngredient");
+export const clearBasket = createAction("basket/clear");

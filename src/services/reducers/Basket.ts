@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addIngredient, removeIngredient, shiftIngredient} from "../actions/Basket";
+import {addIngredient, clearBasket, removeIngredient, shiftIngredient} from "../actions/Basket";
 import {IIngredient, IngredientTypes} from "../../models/Ingredients";
 import {IBasketItem} from "../../models/Basket";
 
@@ -37,6 +37,10 @@ export default createSlice({
                     state.ingredients.splice(index, 1);
                     state.ingredients.splice(index + shift, 0, item);
                 }
+            })
+            .addCase(clearBasket, (state) => {
+                state.bun = undefined;
+                state.ingredients = [];
             });
     },
 });

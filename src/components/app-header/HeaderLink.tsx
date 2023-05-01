@@ -1,6 +1,6 @@
+import {FC, ReactNode} from "react";
 import {Link} from "react-router-dom";
 import styles from "./HeaderLink.module.css";
-import {ReactNode} from "react";
 
 interface IHeaderLinkProps {
     type: string;
@@ -9,7 +9,9 @@ interface IHeaderLinkProps {
     children: ReactNode;
 }
 
-function HeaderLink({type, to, extraClass, children}: IHeaderLinkProps) {
+export const HeaderLink: FC<IHeaderLinkProps> = (
+    {type, to, extraClass, children}
+) => {
     let className = type === "primary" ? styles.primary : styles.secondary;
 
     if (extraClass) {
@@ -22,5 +24,3 @@ function HeaderLink({type, to, extraClass, children}: IHeaderLinkProps) {
         </Link>
     );
 }
-
-export default HeaderLink;

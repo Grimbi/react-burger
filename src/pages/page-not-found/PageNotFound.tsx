@@ -1,6 +1,7 @@
+import {FC} from "react";
 import styles from './PageNotFound.module.css';
 
-function PageNotFound() {
+export const PageNotFound: FC = () => {
     return (
         <div className={styles.page}>
             <h1 className={styles.title}>Page Not Found</h1>
@@ -8,5 +9,3 @@ function PageNotFound() {
         </div>
     );
 }
-
-export default PageNotFound;

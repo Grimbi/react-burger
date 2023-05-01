@@ -1,11 +1,12 @@
+import {FC} from "react";
 import {Link, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import HeaderLink from "./HeaderLink";
+import {HeaderLink} from "./HeaderLink";
 import {getUserSelector} from "../../services/store";
 import styles from './AppHeader.module.css';
 
-function AppHeader() {
+export const AppHeader: FC = () => {
     const {user} = useSelector(getUserSelector);
 
     const location = useLocation();
@@ -38,5 +39,3 @@ function AppHeader() {
         </header>
     );
 }
-
-export default AppHeader;

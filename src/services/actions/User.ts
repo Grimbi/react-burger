@@ -1,15 +1,13 @@
 import {createAction} from "@reduxjs/toolkit";
 import {createAppAsyncThunk, getErrorDescription} from "../../utils/Utils";
-import {IUser, IUserWithPassword} from "../../models/User";
-import {IResponseWithTokens, LOGIN_URL, post, REGISTER_URL, saveTokens} from "../../utils/ServerApi";
+import {ILoginData, IUser, IUserWithPassword} from "../../models/User";
+import {login, register} from "../../utils/ServerApi";
 
 export const userRegister = createAppAsyncThunk<IUser, IUserWithPassword>(
     'user/register',
     async (user, thunkApi) => {
         try {
-            const response = await post<IResponseWithTokens>(REGISTER_URL, user);
-            saveTokens(response.accessToken, response.refreshToken);
-            return response.user;
+            return await register(user);
         } catch (error) {
             return thunkApi.rejectWithValue(
                 getErrorDescription(error, "Не получилось зарегистрировать пользователя")
@@ -18,18 +16,11 @@ export const userRegister = createAppAsyncThunk<IUser, IUserWithPassword>(
     }
 );
 
-interface ILogin {
-    email: string;
-    password: string;
-}
-
-export const userLogin = createAppAsyncThunk<IUser, ILogin>(
+export const userLogin = createAppAsyncThunk<IUser, ILoginData>(
     'user/login',
     async (user, thunkApi) => {
         try {
-            const response = await post<IResponseWithTokens>(LOGIN_URL, user);
-            saveTokens(response.accessToken, response.refreshToken);
-            return response.user;
+            return login(user);
         } catch (error) {
             return thunkApi.rejectWithValue(
                 getErrorDescription(error, "Не получилось авторизовать пользователя")

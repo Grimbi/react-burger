@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {Link} from "react-router-dom";
 import styles from "./NavigationLink.module.css";
 
@@ -7,7 +8,7 @@ interface INavigationLinkProps {
     to: string;
 }
 
-function NavigationLink({label, link, to}: INavigationLinkProps) {
+export const NavigationLink: FC<INavigationLinkProps> = ({label, link, to}) => {
     return (
         <div className={styles.group}>
             <span className={styles.label}>{label}</span>
@@ -15,5 +16,3 @@ function NavigationLink({label, link, to}: INavigationLinkProps) {
         </div>
     );
 }
-
-export default NavigationLink;

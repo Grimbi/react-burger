@@ -1,16 +1,12 @@
-import {ChangeEvent, FormEvent, useEffect, useMemo, useState} from "react";
+import {ChangeEvent, FC, FormEvent, useMemo, useState} from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {getUserProfile, updateUserProfile} from "../../utils/Utils";
 import {setUser} from "../../services/actions/User";
-import {useAppDispatch} from "../../services/store";
+import {getUserSelector, useAppDispatch} from "../../services/store";
 import {IUserWithPassword} from "../../models/User";
+import {updateUserProfile} from "../../utils/ServerApi";
+import {logErrorDescription} from "../../utils/Utils";
+import {useSelector} from "react-redux";
 import styles from "./ProfileEditor.module.css";
-
-const initialFormData: IUserWithPassword = {
-    name: "",
-    email: "",
-    password: "",
-};
 
 interface IEditMode {
     name: boolean;
@@ -24,35 +20,26 @@ const initialEditMode: IEditMode = {
     password: false,
 };
 
-function ProfileEditor() {
+export const ProfileEditor: FC = () => {
     const dispatch = useAppDispatch();
+    const {user} = useSelector(getUserSelector);
 
-    const [userProfile, setUserProfile] = useState<IUserWithPassword>();
-    const [formData, setFormData] = useState<IUserWithPassword>(initialFormData);
+    if (!user) {
+        throw new Error("Invalid user state");
+    }
+
+    const [userPassword, setUserPassword] = useState("");
+    const [formData, setFormData] = useState<IUserWithPassword>({
+        ...user,
+        password: "",
+    });
     const [editMode, setEditMode] = useState(initialEditMode);
 
-    useEffect(() => {
-        getUserProfile()
-            .then(profile => {
-                const profileWithPassword: IUserWithPassword = {
-                    ...profile,
-                    password: "",
-                };
-
-                setUserProfile(profileWithPassword);
-                setFormData({...profileWithPassword});
-            })
-            .catch(error => console.log(error));
-    }, []);
-
     const isChanged = useMemo(() => {
-        return userProfile
-            && formData
-            && (userProfile.name !== formData.name
-                || userProfile.email !== formData.email
-                || userProfile.password !== formData.password
-            );
-    }, [userProfile, formData]);
+        return user.name !== formData.name
+            || user.email !== formData.email
+            || userPassword !== formData.password;
+    }, [user, userPassword, formData]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -66,21 +53,18 @@ function ProfileEditor() {
 
         updateUserProfile(formData)
             .then(updatedProfile => {
-                setUserProfile({
-                    ...formData,
-                    ...updatedProfile,
-                });
+                setUserPassword(formData.password);
                 setEditMode(initialEditMode);
                 dispatch(setUser(updatedProfile));
             })
-            .catch(error => console.log(error));
+            .catch(error => logErrorDescription(error));
     };
 
     const toggleNameEditMode = () => {
         if (editMode.name) {
             setFormData({
                 ...formData,
-                name: userProfile?.name || "",
+                name: user.name,
             });
         }
 
@@ -94,7 +78,7 @@ function ProfileEditor() {
         if (editMode.email) {
             setFormData({
                 ...formData,
-                email: userProfile?.email || "",
+                email: user.email || "",
             });
         }
 
@@ -108,7 +92,7 @@ function ProfileEditor() {
         if (editMode.password) {
             setFormData({
                 ...formData,
-                password: userProfile?.password || "",
+                password: userPassword,
             });
         }
 
@@ -119,13 +103,12 @@ function ProfileEditor() {
     }
 
     const cancel = () => {
-        setFormData(userProfile ? userProfile : initialFormData);
+        setFormData({
+            ...user,
+            password: userPassword,
+        });
         setEditMode(initialEditMode);
     };
-
-    if (!userProfile) {
-        return null;
-    }
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -189,5 +172,3 @@ function ProfileEditor() {
         </form>
     );
 }
-
-export default ProfileEditor;

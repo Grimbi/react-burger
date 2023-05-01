@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {clear, makeOrder} from "../actions/Order";
+import {clearOrder, makeOrder} from "../actions/Order";
 
 interface IOrderState {
     orderId: number | null;
@@ -18,7 +18,7 @@ export default createSlice({
             .addCase(makeOrder.fulfilled, (state, action) => {
                 state.orderId = action.payload;
             })
-            .addCase(clear, (state) => {
+            .addCase(clearOrder, (state) => {
                 state.orderId = null;
             })
     },

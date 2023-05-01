@@ -1,17 +1,17 @@
-import {useCallback, useMemo, useRef} from "react";
+import {FC, useCallback, useMemo, useRef} from "react";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
-import Ingredient from "./Ingredient";
-import Price from "../price/Price";
-import OrderDetails from "../order-details/OrderDetails";
-import Modal from "../modal/Modal";
-import {clear, makeOrder} from "../../services/actions/Order";
+import {Ingredient} from "./Ingredient";
+import {Price} from "../price/Price";
+import {OrderDetails} from "../order-details/OrderDetails";
+import {Modal} from "../modal/Modal";
+import {clearOrder, makeOrder} from "../../services/actions/Order";
 import {getBasketSelector, getOrderSelector, getUserSelector, useAppDispatch} from "../../services/store";
 import {IIngredient} from "../../models/Ingredients";
 import {IBasketItem, makeNewBasketItem} from "../../models/Basket";
-import {addIngredient, shiftIngredient} from "../../services/actions/Basket";
+import {addIngredient, clearBasket, shiftIngredient} from "../../services/actions/Basket";
 import styles from "./BurgerConstructor.module.css";
 
 const DRAGGABLE_INGREDIENT_TYPES = ["bun", "sauce", "main", "basket-item"];
@@ -24,7 +24,7 @@ function isBasketItem(obj: any): obj is IBasketItem {
     return obj.id !== undefined;
 }
 
-function BurgerConstructor() {
+export const BurgerConstructor: FC = () => {
     const navigate = useNavigate();
 
     const {user} = useSelector(getUserSelector);
@@ -53,7 +53,10 @@ function BurgerConstructor() {
     );
 
     const handleCloseOrder = useCallback(
-        () => dispatch(clear()),
+        () => {
+            dispatch(clearOrder());
+            dispatch(clearBasket());
+        },
         [dispatch]
     );
 
@@ -131,5 +134,3 @@ function BurgerConstructor() {
         </section>
     );
 }
-
-export default BurgerConstructor;

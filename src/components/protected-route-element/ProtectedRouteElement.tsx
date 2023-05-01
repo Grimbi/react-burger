@@ -1,4 +1,4 @@
-import {ReactElement} from "react";
+import {FC, ReactElement} from "react";
 import {useSelector} from "react-redux";
 import {Navigate, useLocation} from "react-router-dom";
 import {getUserSelector} from "../../services/store";
@@ -8,7 +8,7 @@ interface IProtectedRouteElementProps {
     children: ReactElement;
 }
 
-function ProtectedRouteElement({onlyUnAuth = false, children}: IProtectedRouteElementProps): ReactElement | null {
+export const ProtectedRouteElement: FC<IProtectedRouteElementProps> = ({onlyUnAuth = false, children}) => {
     const location = useLocation();
     const { user, isAuthChecked } = useSelector(getUserSelector);
 
@@ -26,5 +26,3 @@ function ProtectedRouteElement({onlyUnAuth = false, children}: IProtectedRouteEl
 
     return children;
 }
-
-export default ProtectedRouteElement;

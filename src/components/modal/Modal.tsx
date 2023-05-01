@@ -1,18 +1,17 @@
-import {MouseEvent, ReactNode, useEffect} from "react";
+import {FC, MouseEvent, PropsWithChildren, useEffect} from "react";
 import ReactDOM from "react-dom";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import ModalOverlay from "../modal-overlay/ModalOverlay";
+import {ModalOverlay} from "../modal-overlay/ModalOverlay";
 import styles from "./Modal.module.css";
 
 const modalRoot = document.getElementById("modal");
 const stopPropagation = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
 interface IModalProps {
-    children: ReactNode;
     onClose: () => void;
 }
 
-function Modal({children, onClose}: IModalProps) {
+export const Modal: FC<PropsWithChildren<IModalProps>> = ({children, onClose}) => {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
@@ -40,5 +39,3 @@ function Modal({children, onClose}: IModalProps) {
 
     return (<></>);
 }
-
-export default Modal;

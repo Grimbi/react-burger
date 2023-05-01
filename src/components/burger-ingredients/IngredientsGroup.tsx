@@ -1,16 +1,16 @@
 import {forwardRef, useMemo} from "react";
+import {useSelector} from "react-redux";
 import {IngredientTypes} from "../../models/Ingredients";
 import {getIngredientsSelector} from "../../services/store";
-import IngredientCard from "./IngredientCard";
+import {IngredientCard} from "./IngredientCard";
 import styles from "./IngredientsGroup.module.css";
-import {useSelector} from "react-redux";
 
 interface IIngredientsGroupProps {
     name: string;
     group: IngredientTypes;
 }
 
-const IngredientsGroup = forwardRef<HTMLLIElement, IIngredientsGroupProps>((
+export const IngredientsGroup = forwardRef<HTMLLIElement, IIngredientsGroupProps>((
     {name, group},
     ref
 ) => {
@@ -34,5 +34,3 @@ const IngredientsGroup = forwardRef<HTMLLIElement, IIngredientsGroupProps>((
         </li>
     );
 });
-
-export default IngredientsGroup;
