@@ -10,7 +10,7 @@ import {getIngredientsSelector, useAppSelector} from "../../services/store";
 import styles from "./OrderInfo.module.css";
 
 export type TOrderInfoProps = {
-    modal: boolean;
+    modal?: boolean;
 };
 
 type TOrderInfoParams = {
@@ -22,7 +22,7 @@ type TGroupedIngredient = {
     count: number;
 };
 
-export const OrderInfo: FC<TOrderInfoProps> = ({modal}) => {
+export const OrderInfo: FC<TOrderInfoProps> = ({modal = false}) => {
     const {id} = useParams<TOrderInfoParams>();
     const [order, setOrder] = useState<TOrder>();
     const {items} = useAppSelector(getIngredientsSelector);

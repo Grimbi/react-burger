@@ -85,9 +85,9 @@ export const App: FC = () => {
                     <Route index element={<ProfileEditor/>}/>
                     <Route path="orders" element={<Orders/>}/>
                 </Route>
-                <Route path="/profile/orders/:id" element={<OrderInfo modal={false}/>}/>
+                <Route path="/profile/orders/:id" element={<OrderInfo/>}/>
                 <Route path="/feed" element={<FeedPage/>}/>
-                <Route path="/feed/:id" element={<OrderInfo modal={false}/>}/>
+                <Route path="/feed/:id" element={<OrderInfo/>}/>
                 <Route path="/ingredients/:id" element={<IngredientDetails/>}/>
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>
@@ -95,17 +95,17 @@ export const App: FC = () => {
                 <Routes>
                     <Route path="/ingredients/:id" element={
                         <Modal onClose={handleModalClose}>
-                            <IngredientDetails modal={true}/>
+                            <IngredientDetails modal/>
                         </Modal>
                     }/>
                     <Route path="/feed/:id" element={
                         <Modal onClose={handleModalClose}>
-                            <OrderInfo modal={true}/>
+                            <OrderInfo modal/>
                         </Modal>
                     }/>
                     <Route path="/profile/orders/:id" element={
                         <Modal onClose={handleModalClose}>
-                            <OrderInfo modal={true}/>
+                            <OrderInfo modal/>
                         </Modal>
                     }/>
                 </Routes>
