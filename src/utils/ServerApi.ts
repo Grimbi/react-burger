@@ -1,6 +1,7 @@
 import axios, {Method} from "axios";
 import {ILoginData, IUser, IUserWithPassword} from "../models/User";
 import {IIngredient} from "../models/Ingredients";
+import {TOrder} from "../models/Order";
 
 const REGISTER_URL = "auth/register";
 const LOGIN_URL = "auth/login";
@@ -137,6 +138,15 @@ export const loadIngredients = async (): Promise<Array<IIngredient>> => {
     return response.data;
 }
 
+export interface IOrderResponse extends IResponse {
+    orders: Array<TOrder>;
+}
+
+export const getOrder = async (orderNumber: string): Promise<Array<TOrder>> => {
+    const response = await get<IOrderResponse>(`${ORDER_URL}/${orderNumber}`);
+    return response.orders;
+}
+
 export const getUserProfile = async (): Promise<IUser> => {
     const response = await requestWithAuth<IResponseWithUser>("GET", USER_URL);
     return response.success
@@ -169,14 +179,14 @@ export const addOrder = async (ingredients: Array<string>): Promise<number> => {
 
 const axiosInstance = axios.create({
     baseURL: "https://norma.nomoreparties.space/api",
-    timeout: 5000,
+    timeout: 20000,
     timeoutErrorMessage: "Request timeout",
     responseType: "json",
 });
 
 axiosInstance.interceptors.request.use(config => {
     const token = localStorage.getItem("accessToken");
-    if (token && config.url !== "orders") {
+    if (token) {
         config.headers.Authorization = token;
     }
     return config;

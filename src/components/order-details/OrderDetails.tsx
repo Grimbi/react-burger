@@ -1,11 +1,10 @@
 import {FC} from "react";
-import {useSelector} from "react-redux";
-import {getOrderSelector} from "../../services/store";
+import {getOrderSelector, useAppSelector} from "../../services/store";
 import styles from "./OrderDetails.module.css";
 import doneImage from "../../images/done.svg";
 
 export const OrderDetails: FC = () => {
-    const order = useSelector(getOrderSelector);
+    const order = useAppSelector(getOrderSelector);
     return (
         <>
             <h2 className={styles.order}>{order.orderId}</h2>

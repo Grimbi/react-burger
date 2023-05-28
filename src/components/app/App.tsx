@@ -1,6 +1,5 @@
 import {FC, useEffect} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {AppHeader} from "../app-header/AppHeader";
 import {MainPage} from "../../pages/main/MainPage";
 import {LoginPage} from "../../pages/login/LoginPage";
@@ -8,7 +7,7 @@ import {RegisterPage} from "../../pages/register/RegisterPage";
 import {ForgotPasswordPage} from "../../pages/forgot-password/ForgotPasswordPage";
 import {ResetPasswordPage} from "../../pages/reset-password/ResetPasswordPage";
 import {ProfilePage} from "../../pages/profile/ProfilePage";
-import {OrderFeedPage} from "../../pages/order-feed/OrderFeedPage";
+import {FeedPage} from "../../pages/feed/FeedPage";
 import {ProfileEditor} from "../profile-editor/ProfileEditor";
 import {Orders} from "../orders/Orders";
 import {PageNotFound} from "../../pages/page-not-found/PageNotFound";
@@ -17,10 +16,11 @@ import {Modal} from "../modal/Modal";
 import {fetchIngredients} from "../../services/actions/Ingredients";
 import {setIsAuthChecked, setUser} from "../../services/actions/User";
 import {ProtectedRouteElement} from "../protected-route-element/ProtectedRouteElement";
-import {getUserSelector, useAppDispatch} from "../../services/store";
+import {getUserSelector, useAppDispatch, useAppSelector} from "../../services/store";
 import {getUserProfile} from "../../utils/ServerApi";
 import {logErrorDescription} from "../../utils/Utils";
 import styles from './App.module.css';
+import {OrderInfo} from "../order-info/OrderInfo";
 
 export const App: FC = () => {
     const dispatch = useAppDispatch();
@@ -39,13 +39,14 @@ export const App: FC = () => {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
                     logErrorDescription(error);
+                    dispatch(setIsAuthChecked(true));
                 });
         } else {
             dispatch(setIsAuthChecked(true));
         }
     }, [dispatch]);
 
-    const {isWaitingReset} = useSelector(getUserSelector);
+    const {isWaitingReset} = useAppSelector(getUserSelector);
 
     const handleModalClose = () => navigate(-1);
 
@@ -84,21 +85,27 @@ export const App: FC = () => {
                     <Route index element={<ProfileEditor/>}/>
                     <Route path="orders" element={<Orders/>}/>
                 </Route>
-                <Route path="/order-feed" element={
-                    <ProtectedRouteElement>
-                        <OrderFeedPage/>
-                    </ProtectedRouteElement>
-                }/>
-                <Route path="/ingredients/:id" element={
-                    <IngredientDetails/>
-                }/>
+                <Route path="/profile/orders/:id" element={<OrderInfo/>}/>
+                <Route path="/feed" element={<FeedPage/>}/>
+                <Route path="/feed/:id" element={<OrderInfo/>}/>
+                <Route path="/ingredients/:id" element={<IngredientDetails/>}/>
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>
             {background && (
                 <Routes>
                     <Route path="/ingredients/:id" element={
                         <Modal onClose={handleModalClose}>
-                            <IngredientDetails modal={true}/>
+                            <IngredientDetails modal/>
+                        </Modal>
+                    }/>
+                    <Route path="/feed/:id" element={
+                        <Modal onClose={handleModalClose}>
+                            <OrderInfo modal/>
+                        </Modal>
+                    }/>
+                    <Route path="/profile/orders/:id" element={
+                        <Modal onClose={handleModalClose}>
+                            <OrderInfo modal/>
                         </Modal>
                     }/>
                 </Routes>

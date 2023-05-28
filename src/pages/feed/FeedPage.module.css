@@ -1,0 +1,17 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    width: 1240px;
+}
+
+.title {
+    composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mb-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 600px auto;
+    gap: 56px;
+}

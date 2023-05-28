@@ -1,0 +1,31 @@
+.summary {
+    display: flex;
+    flex-direction: column;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.done {
+    color: #00CCCC;
+}
+
+.pending {
+    color: #F2F2F3;
+}
+
+.completed {
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mt-15 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    margin-bottom: 0;
+    color: #F2F2F3;
+}
+
+.total {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_digits-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    color: #F2F2F3;
+}

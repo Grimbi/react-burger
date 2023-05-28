@@ -3,7 +3,7 @@ import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Price.module.css";
 
 interface IPriceProps {
-    value: number;
+    value: string;
     extraClass: string;
 }
 

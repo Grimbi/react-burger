@@ -1,7 +1,6 @@
 import {FC} from "react";
-import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getIngredientsSelector} from "../../services/store";
+import {getIngredientsSelector, useAppSelector} from "../../services/store";
 import styles from "./IngredientDetails.module.css";
 
 interface IIngredientDetailsProps {
@@ -15,7 +14,7 @@ type TIngredientDetailsParams = {
 export const IngredientDetails: FC<IIngredientDetailsProps> = ({modal = false}) => {
     const {id} = useParams<TIngredientDetailsParams>();
 
-    const {items} = useSelector(getIngredientsSelector);
+    const {items} = useAppSelector(getIngredientsSelector);
     const ingredient = items.find(item => id && item._id === id);
 
     if (!ingredient) {

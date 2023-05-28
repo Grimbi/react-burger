@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.ingredient {
+    width: 64px;
+    height: 64px;
+    margin-right: -16px;
+    position: relative;
+    object-fit: cover;
+    object-position: center;
+    background:
+            linear-gradient(0, #131316, #131316) padding-box,
+            linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 100px;
+}
+
+.extra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin: 0 0 0 -52px;
+    background: #1C1C21;
+    opacity: 0.6;
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}

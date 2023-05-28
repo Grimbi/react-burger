@@ -1,0 +1,123 @@
+.modalHeader {
+    composes: ml-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mr-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    margin-bottom: 0;
+    composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    margin-top: 52px;
+    align-self: start;
+}
+
+.header {
+    composes: mt-30 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: ml-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mr-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    margin-bottom: 0;
+    composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 640px;
+    height: 64px;
+}
+
+.info {
+    composes: mt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+}
+
+.name {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.status {
+    composes: pt-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_main-small from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    margin: 0;
+    color: #0CC;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    composes: mt-15 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: mb-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.structure {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.ingredients {
+    composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    padding: 0;
+
+    height: calc(64px * 4 + 16px * 4);
+    overflow-y: auto;
+}
+
+.ingredients::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+    border: 3px solid #8585AD;
+    border-radius: unset;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 16px;
+    width: 608px;
+    align-items: center;
+}
+
+.image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    object-position: center;
+    background:
+            linear-gradient(0, #131316, #131316) padding-box,
+            linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 100px;
+}
+
+.ingredientName {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.ingredientPrice {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.date {
+    composes: text_type_main-small from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_color_inactive from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.price {
+    composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}

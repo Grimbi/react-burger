@@ -1,7 +1,6 @@
 import {forwardRef, useMemo} from "react";
-import {useSelector} from "react-redux";
 import {IngredientTypes} from "../../models/Ingredients";
-import {getIngredientsSelector} from "../../services/store";
+import {getIngredientsSelector, useAppSelector} from "../../services/store";
 import {IngredientCard} from "./IngredientCard";
 import styles from "./IngredientsGroup.module.css";
 
@@ -14,7 +13,7 @@ export const IngredientsGroup = forwardRef<HTMLLIElement, IIngredientsGroupProps
     {name, group},
     ref
 ) => {
-    const {items} = useSelector(getIngredientsSelector);
+    const {items} = useAppSelector(getIngredientsSelector);
 
     const groupIngredients = useMemo(
         () => items.filter(ingredient => ingredient.type === group),

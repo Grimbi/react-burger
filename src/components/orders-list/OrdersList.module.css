@@ -1,0 +1,24 @@
+.orders {
+    composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+    height: calc(100vh - 56px - 40px - 40px);
+    overflow-y: auto;
+}
+
+.orders::-webkit-scrollbar {
+    width: 8px;
+}
+
+.orders::-webkit-scrollbar-thumb {
+    border: 3px solid #8585AD;
+    border-radius: unset;
+}

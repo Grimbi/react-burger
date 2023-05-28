@@ -1,8 +1,7 @@
 import React, {FC} from "react";
 import {Navigate, Outlet, useLocation, useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {clear} from "../../services/actions/User";
-import {getUserSelector, useAppDispatch} from "../../services/store";
+import {getUserSelector, useAppDispatch, useAppSelector} from "../../services/store";
 import {logout} from "../../utils/ServerApi";
 import {logErrorDescription} from "../../utils/Utils";
 import styles from "./ProfilePage.module.css";
@@ -11,7 +10,7 @@ export const ProfilePage: FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const {user} = useSelector(getUserSelector);
+    const {user} = useAppSelector(getUserSelector);
 
     if (!user) {
         return (<Navigate to={"/login"} state={{ previousPath: "/profile" }}/>);

@@ -1,18 +1,17 @@
 import {FC} from "react";
 import {Link, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {HeaderLink} from "./HeaderLink";
-import {getUserSelector} from "../../services/store";
+import {getUserSelector, useAppSelector} from "../../services/store";
 import styles from './AppHeader.module.css';
 
 export const AppHeader: FC = () => {
-    const {user} = useSelector(getUserSelector);
+    const {user} = useAppSelector(getUserSelector);
 
     const location = useLocation();
 
     const constructorType = location.pathname === "/" ? "primary" : "secondary";
-    const orderFeedType = location.pathname === "/order-feed" ? "primary" : "secondary";
+    const orderFeedType = location.pathname === "/feed" ? "primary" : "secondary";
     const profileType = location.pathname === "/profile" || location.pathname === "/profile/orders" ? "primary" : "secondary";
 
     return (
@@ -23,7 +22,7 @@ export const AppHeader: FC = () => {
                         <BurgerIcon type={constructorType}/>
                         Конструктор
                     </HeaderLink>
-                    <HeaderLink type={orderFeedType} to={"/order-feed"}>
+                    <HeaderLink type={orderFeedType} to={"/feed"}>
                         <ListIcon type={orderFeedType}/>
                         Лента заказов
                     </HeaderLink>
