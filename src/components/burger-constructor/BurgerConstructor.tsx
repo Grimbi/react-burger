@@ -1,6 +1,5 @@
 import {FC, useCallback, useMemo, useRef} from "react";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Ingredient} from "./Ingredient";
@@ -8,7 +7,13 @@ import {Price} from "../price/Price";
 import {OrderDetails} from "../order-details/OrderDetails";
 import {Modal} from "../modal/Modal";
 import {clearOrder, makeOrder} from "../../services/actions/Order";
-import {getBasketSelector, getOrderSelector, getUserSelector, useAppDispatch} from "../../services/store";
+import {
+    getBasketSelector,
+    getOrderSelector,
+    getUserSelector,
+    useAppDispatch,
+    useAppSelector
+} from "../../services/store";
 import {IIngredient} from "../../models/Ingredients";
 import {IBasketItem, makeNewBasketItem} from "../../models/Basket";
 import {addIngredient, clearBasket, shiftIngredient} from "../../services/actions/Basket";
@@ -27,9 +32,9 @@ function isBasketItem(obj: any): obj is IBasketItem {
 export const BurgerConstructor: FC = () => {
     const navigate = useNavigate();
 
-    const {user} = useSelector(getUserSelector);
-    const basket = useSelector(getBasketSelector);
-    const {orderId} = useSelector(getOrderSelector);
+    const {user} = useAppSelector(getUserSelector);
+    const basket = useAppSelector(getBasketSelector);
+    const {orderId} = useAppSelector(getOrderSelector);
 
     const dispatch = useAppDispatch();
 
@@ -114,7 +119,7 @@ export const BurgerConstructor: FC = () => {
             </ul>
             {basket.bun && (<Ingredient type="bottom" ingredient={basket.bun}/>)}
             <div className={styles.order}>
-                <Price value={total} extraClass={styles.total}/>
+                <Price value={total.toString()} extraClass={styles.total}/>
                 <Button
                     htmlType="button"
                     type="primary"

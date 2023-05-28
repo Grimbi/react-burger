@@ -1,0 +1,22 @@
+.title {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    color: #F2F2F3;
+}
+
+.container {
+    composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    height: 162px;
+}
+
+.item {
+    composes: text from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    list-style-type: none;
+}

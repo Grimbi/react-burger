@@ -1,11 +1,10 @@
 import {ChangeEvent, FC, FormEvent, useMemo, useState} from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {setUser} from "../../services/actions/User";
-import {getUserSelector, useAppDispatch} from "../../services/store";
+import {getUserSelector, useAppDispatch, useAppSelector} from "../../services/store";
 import {IUserWithPassword} from "../../models/User";
 import {updateUserProfile} from "../../utils/ServerApi";
 import {logErrorDescription} from "../../utils/Utils";
-import {useSelector} from "react-redux";
 import styles from "./ProfileEditor.module.css";
 
 interface IEditMode {
@@ -22,7 +21,7 @@ const initialEditMode: IEditMode = {
 
 export const ProfileEditor: FC = () => {
     const dispatch = useAppDispatch();
-    const {user} = useSelector(getUserSelector);
+    const {user} = useAppSelector(getUserSelector);
 
     if (!user) {
         throw new Error("Invalid user state");
