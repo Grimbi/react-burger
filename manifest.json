@@ -1,0 +1,8 @@
+{
+  "short_name": "Stellar Burgers",
+  "name": "React Burger project from Yandex.Practicum",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
