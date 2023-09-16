@@ -1,13 +1,13 @@
-import {nanoid} from "@reduxjs/toolkit";
-import feedSlice, {IFeedState} from "./Feed";
-import {feedOnWSClose, feedOnWSError, feedOnWSMessage, feedOnWSOpen} from "../actions/Feed";
+import ordersSlice, {IOrdersState} from "./Orders";
+import {ordersOnWSClose, ordersOnWSError, ordersOnWSMessage, ordersOnWSOpen} from "../actions/orders";
 import {EOrderStatus, TOrder} from "../../models/Order";
+import {nanoid} from "@reduxjs/toolkit";
 import {BUN1, BUN2, INGREDIENT1, INGREDIENT2, INGREDIENT3} from "../../utils/TestIngredients";
 
-const reducer = feedSlice.reducer;
+const reducer = ordersSlice.reducer;
 
-describe("Feed reducer", () => {
-    it("should initialize feed reducer with initial state", () => {
+describe("Orders reducer", () => {
+    it("should initialize orders reducer with initial state", () => {
         expect(
             reducer(
                 undefined,
@@ -22,8 +22,8 @@ describe("Feed reducer", () => {
         });
     });
 
-    it("should open feed data stream", () => {
-        openFeedStream();
+    it("should open orders stream", () => {
+        openOrdersStream();
     });
 
     it("should handle errors", () => {
@@ -31,7 +31,7 @@ describe("Feed reducer", () => {
         expect(
             reducer(
                 undefined,
-                feedOnWSError(errorDescription)
+                ordersOnWSError(errorDescription)
             )
         ).toEqual({
             isOpen: false,
@@ -42,11 +42,11 @@ describe("Feed reducer", () => {
         });
     });
 
-    it("should close feed data stream", () => {
+    it("should close orders data stream", () => {
         expect(
             reducer(
-                openFeedStream(),
-                feedOnWSClose()
+                openOrdersStream(),
+                ordersOnWSClose()
             )
         ).toEqual({
             isOpen: false,
@@ -80,8 +80,8 @@ describe("Feed reducer", () => {
 
         expect(
             reducer(
-                openFeedStream(),
-                feedOnWSMessage({
+                openOrdersStream(),
+                ordersOnWSMessage({
                     orders: [order1, order2],
                     total: 5,
                     totalToday: 2,
@@ -89,7 +89,7 @@ describe("Feed reducer", () => {
             )
         ).toEqual({
             isOpen: true,
-            orders: [order1, order2],
+            orders: [order2, order1],
             total: 5,
             totalToday: 2,
             error: null,
@@ -97,10 +97,10 @@ describe("Feed reducer", () => {
     });
 });
 
-function openFeedStream(): IFeedState {
+function openOrdersStream(): IOrdersState {
     const state = reducer(
         undefined,
-        feedOnWSOpen()
+        ordersOnWSOpen()
     );
 
     expect(

@@ -10,7 +10,7 @@ describe("Basket reducer", () => {
         expect(
             reducer(
                 undefined,
-                {type: "idle"}
+                {type: "none"}
             )
         ).toEqual({
             bun: undefined,
