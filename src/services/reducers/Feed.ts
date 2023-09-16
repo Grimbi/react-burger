@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {feedOnWSClose, feedOnWSError, feedOnWSMessage, feedOnWSOpen} from "../actions/Feed";
 import {TOrder} from "../../models/Order";
 
-interface IFeedState {
+export interface IFeedState {
     isOpen: boolean;
     orders: Array<TOrder>;
     total: number;

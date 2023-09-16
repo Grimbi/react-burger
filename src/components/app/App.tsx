@@ -54,7 +54,7 @@ export const App: FC = () => {
         <div className={styles.app}>
             <AppHeader/>
             <Routes location={background || location}>
-                <Route index element={<MainPage/>}/>
+                <Route path="/" element={<MainPage/>}/>
                 <Route path="/login" element={
                     <ProtectedRouteElement onlyUnAuth={true}>
                         <LoginPage/>
