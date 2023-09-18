@@ -27,7 +27,7 @@ export const Modal: FC<PropsWithChildren<IModalProps>> = ({children, onClose}) =
         return ReactDOM.createPortal(
             (
                 <ModalOverlay onClick={onClose}>
-                    <div className={styles.modal} onClick={stopPropagation}>
+                    <div className={styles.modal} onClick={stopPropagation} data-testid={"modal"}>
                         <div className={styles.close}><CloseIcon type="primary" onClick={onClose}/></div>
                         {children}
                     </div>
