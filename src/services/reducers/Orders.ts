@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {TOrder} from "../../models/Order";
 import {ordersOnWSClose, ordersOnWSError, ordersOnWSMessage, ordersOnWSOpen} from "../actions/orders";
 
-interface IOrdersState {
+export interface IOrdersState {
     isOpen: boolean;
     orders: Array<TOrder>;
     total: number;

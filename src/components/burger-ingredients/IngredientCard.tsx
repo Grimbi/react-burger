@@ -35,7 +35,7 @@ export const IngredientCard: FC<IIngredientCardProps> = ({ingredient}) => {
     );
 
     return (
-        <li className={styles.listItem} ref={dragRef}>
+        <li className={styles.listItem} ref={dragRef} data-testid="ingredient">
             <Link
                 to={`/ingredients/${ingredient._id}`}
                 state={{ background: location }}

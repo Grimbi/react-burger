@@ -127,6 +127,7 @@ export const BurgerConstructor: FC = () => {
                     extraClass={styles.submit}
                     onClick={handleMakeOrder}
                     disabled={!basket.bun || basket.ingredients.length === 0}
+                    data-testid="makeOrderButton"
                 >
                     Оформить заказ
                 </Button>

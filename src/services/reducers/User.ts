@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {IUser} from "../../models/User";
 import {clear, setIsAuthChecked, setIsWaitingReset, setUser, userLogin, userRegister} from "../actions/User";
 
-interface IUserState {
+export interface IUserState {
     user: IUser | null,
     isAuthChecked: boolean,
     isWaitingReset: boolean,

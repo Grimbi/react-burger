@@ -46,7 +46,7 @@ export const Ingredient: FC<IIngredientProps> = (
     }
 
     return (
-        <div className={isDrag ? styles.draggingIngredient : styles.ingredient} ref={ref}>
+        <div className={isDrag ? styles.draggingIngredient : styles.ingredient} ref={ref} data-testid={"burger-ingredient"}>
             {ingredient.type !== "bun" && <DragIcon type="primary"/>}
             <ConstructorElement
                 type={type}

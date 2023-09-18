@@ -3,7 +3,7 @@ import {addIngredient, clearBasket, removeIngredient, shiftIngredient} from "../
 import {IIngredient, IngredientTypes} from "../../models/Ingredients";
 import {IBasketItem} from "../../models/Basket";
 
-interface IBasketState {
+export interface IBasketState {
     bun?: IIngredient;
     ingredients: Array<IBasketItem>;
 }
